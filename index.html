@@ -109,6 +109,7 @@
       padding: 32px;
       margin-bottom: 20px;
       transition: all 0.3s ease;
+      scroll-margin-top: 80px;
     }
 
     .card:hover {
@@ -247,13 +248,13 @@
 
     const content = {
       en: `
-        <div class="card highlight">
+        <div id="about-en" class="card highlight">
           <h2>About EastDev Games</h2>
           <p>We're an independent mobile game developer creating fun, accessible games for everyone. Our focus is on delivering smooth experiences across different genres and platforms.</p>
           <p>All our games share unified support through a single contact channel for faster, more consistent responses.</p>
         </div>
 
-        <div class="card">
+        <div id="privacy-en" class="card">
           <h2>Privacy Overview</h2>
           <p>We respect your privacy. In general, we don't directly collect or store personal information unless you contact us for support.</p>
         </div>
@@ -292,13 +293,13 @@
         </div>
       `,
       tr: `
-        <div class="card highlight">
+        <div id="about-tr" class="card highlight">
           <h2>EastDev Games Hakkında</h2>
           <p>Herkes için eğlenceli ve erişilebilir mobil oyunlar geliştiren bağımsız bir stüdyoyuz. Farklı türlerde ve platformlarda akıcı deneyimler sunmaya odaklanıyoruz.</p>
           <p>Tüm oyunlarımız, daha hızlı ve tutarlı yanıtlar için tek bir iletişim kanalı üzerinden birleşik destek alır.</p>
         </div>
 
-        <div class="card">
+        <div id="privacy-tr" class="card">
           <h2>Gizlilik Özeti</h2>
           <p>Gizliliğinize saygı duyuyoruz. Genel olarak, destek için bizimle iletişime geçmediğiniz sürece doğrudan kişisel veri toplamıyor veya saklamıyoruz.</p>
         </div>
@@ -374,15 +375,51 @@
       localStorage.setItem("theme", light ? "light" : "dark");
     }
 
-    const savedLang = localStorage.getItem("lang") || "en";
+    function parseHash() {
+      const raw = (location.hash || "").replace("#", "").trim();
+      if (!raw) return { lang: null, targetId: null };
+
+      if (raw === "en" || raw === "tr") return { lang: raw, targetId: null };
+
+      const parts = raw.split("-");
+      const last = parts[parts.length - 1];
+      const lang = (last === "en" || last === "tr") ? last : null;
+
+      return { lang, targetId: raw };
+    }
+
+    function scrollToTarget(targetId) {
+      if (!targetId) return;
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    }
+
+    const { lang: hashLang, targetId } = parseHash();
+    const savedLang = localStorage.getItem("lang");
+    const initLang = (hashLang === "tr" || hashLang === "en") ? hashLang : (savedLang || "en");
     const savedTheme = localStorage.getItem("theme") || "dark";
 
-    setLang(savedLang);
+    setLang(initLang);
     setTheme(savedTheme === "light");
+    scrollToTarget(targetId);
 
-    btnEN.onclick = () => setLang("en");
-    btnTR.onclick = () => setLang("tr");
+    btnEN.onclick = () => {
+      setLang("en");
+      history.replaceState(null, "", "#en");
+    };
+    btnTR.onclick = () => {
+      setLang("tr");
+      history.replaceState(null, "", "#tr");
+    };
     btnTheme.onclick = () => setTheme(!document.body.classList.contains("light"));
+
+    window.addEventListener("hashchange", () => {
+      const { lang, targetId } = parseHash();
+      const effectiveLang = (lang === "en" || lang === "tr") ? lang : (localStorage.getItem("lang") || "en");
+      setLang(effectiveLang);
+      scrollToTarget(targetId);
+    });
   </script>
 </body>
 
