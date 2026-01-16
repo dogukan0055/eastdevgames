@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>EastDev Games – Support & Privacy</title>
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --text: #eaeaea;
+      --muted: #b3b3b3;
+      --border: #2a2d34;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body.light {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #555555;
+      --border: #dddddd;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button.active {
+      background: rgba(127, 127, 127, 0.15);
+    }
+
+    section {
+      margin-bottom: 24px;
+      scroll-margin-top: 16px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    a {
+      color: var(--text);
+    }
+
+    .divider {
+      text-align: center;
+      margin: 40px 0 32px;
+      color: var(--muted);
+      font-size: 13px;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 35%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    footer {
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 id="title">Support & Privacy</h1>
+
+    <div class="controls">
+      <button id="btn-en" class="active">🇬🇧</button>
+      <button id="btn-tr">🇹🇷</button>
+      <button id="btn-theme">🌙</button>
+    </div>
+  </header>
+
+  <main id="content"></main>
+
+  <footer>
+    <p>
+      <a href="mailto:eastdevgames@gmail.com">eastdevgames@gmail.com</a>
+    </p>
+    <p>© 2026 Doğukan Şıhman</p>
+  </footer>
+
+  <script>
+    const EMAIL = "eastdevgames@gmail.com";
+    const LAST_UPDATED = "2026-01-16";
+
+    const content = {
+      en: `
+        <section id="about-en">
+          <h2>About Us</h2>
+          <p><strong>EastDev Games</strong> is an independent mobile game developer focused on creating fun, accessible, and lightweight games for a wide audience.</p>
+          <p>We publish multiple games across different genres and provide support through a single contact channel.</p>
+        </section>
+
+        <div class="divider">— Privacy Policy —</div>
+
+        <section id="privacy-en">
+          <p><strong>EastDev Games</strong> respects your privacy.</p>
+          <p><strong>Last updated:</strong> ${LAST_UPDATED}</p>
+        </section>
+
+        <section>
+          <h2>Data Collection</h2>
+          <p>We do not directly collect personal information. Some third-party services (ads/analytics) may collect limited data under their own policies.</p>
+        </section>
+
+        <section>
+          <h2>Contact</h2>
+          <p>Email us at <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+        </section>
+      `,
+      tr: `
+        <section id="about-tr">
+          <h2>Hakkımızda</h2>
+          <p><strong>EastDev Games</strong>, eğlenceli ve erişilebilir mobil oyunlar geliştiren bağımsız bir oyun geliştiricisidir.</p>
+          <p>Tüm oyunlarımız için destek tek bir iletişim kanalı üzerinden sağlanır.</p>
+        </section>
+
+        <div class="divider">— Gizlilik Politikası —</div>
+
+        <section id="privacy-tr">
+          <p><strong>EastDev Games</strong> gizliliğinize saygı duyar.</p>
+          <p><strong>Son güncelleme:</strong> ${LAST_UPDATED}</p>
+        </section>
+
+        <section>
+          <h2>Veri Toplama</h2>
+          <p>Doğrudan kişisel veri toplamıyoruz. Reklam ve analiz hizmetleri sınırlı veriler toplayabilir.</p>
+        </section>
+
+        <section>
+          <h2>İletişim</h2>
+          <p>E-posta: <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+        </section>
+      `
+    };
+
+    const contentEl = document.getElementById("content");
+    const btnEN = document.getElementById("btn-en");
+    const btnTR = document.getElementById("btn-tr");
+    const btnTheme = document.getElementById("btn-theme");
+
+    function setLang(lang) {
+      contentEl.innerHTML = content[lang];
+      btnEN.classList.toggle("active", lang === "en");
+      btnTR.classList.toggle("active", lang === "tr");
+      document.documentElement.lang = lang;
+      localStorage.setItem("lang", lang);
+    }
+
+    function setTheme(light) {
+      document.body.classList.toggle("light", light);
+      btnTheme.textContent = light ? "☀️" : "🌙";
+      localStorage.setItem("theme", light ? "light" : "dark");
+    }
+
+    const savedLang = localStorage.getItem("lang") || "en";
+    const savedTheme = localStorage.getItem("theme") || "dark";
+
+    setLang(savedLang);
+    setTheme(savedTheme === "light");
+
+    btnEN.onclick = () => setLang("en");
+    btnTR.onclick = () => setLang("tr");
+    btnTheme.onclick = () => setTheme(!document.body.classList.contains("light"));
+  </script>
+</body>
+
+</html>
