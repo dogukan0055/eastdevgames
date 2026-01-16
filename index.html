@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark light" />
-  <title>EastDev Games – Support & Privacy</title>
+  <title>EastDev Games – Privacy Policy</title>
 
   <style>
     :root {
@@ -51,6 +51,7 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     button {
@@ -74,7 +75,7 @@
 
     h2 {
       font-size: 16px;
-      margin-bottom: 8px;
+      margin: 0 0 8px 0;
     }
 
     p,
@@ -89,6 +90,14 @@
 
     a {
       color: var(--text);
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
     }
 
     .divider {
@@ -116,104 +125,227 @@
     .divider::after {
       right: 0;
     }
-
-    footer {
-      margin-top: 48px;
-      font-size: 12px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      padding-top: 16px;
-      text-align: center;
-    }
   </style>
 </head>
 
 <body>
   <header>
-    <h1 id="title">Support & Privacy</h1>
+    <h1 id="title">Privacy Policy</h1>
 
     <div class="controls">
-      <button id="btn-en" class="active">🇬🇧</button>
-      <button id="btn-tr">🇹🇷</button>
-      <button id="btn-theme">🌙</button>
+      <!-- Language -->
+      <button id="btn-en" class="active" aria-label="English" title="English">🇬🇧</button>
+      <button id="btn-tr" aria-label="Türkçe" title="Türkçe">🇹🇷</button>
+
+      <!-- Theme -->
+      <button id="btn-theme" title="Toggle theme" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
 
   <main id="content"></main>
 
   <footer>
-    <p>
-      <a href="mailto:eastdevgames@gmail.com">eastdevgames@gmail.com</a>
+    <p style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true">
+        <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.5" />
+        <path d="M4 6l8 6 8-6" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+      <a id="emailLink" href="#" style="text-decoration:none;">eastdevgames@gmail.com</a>
+      <span style="opacity:.7;">•</span>
+      <span id="updated" style="opacity:.7;"></span>
     </p>
-    <p>© 2026 Doğukan Şıhman</p>
   </footer>
 
   <script>
     const EMAIL = "eastdevgames@gmail.com";
-    const LAST_UPDATED = "2026-01-16";
+    const LAST_UPDATED = "2026-01-16"; // YYYY-MM-DD
 
+    // Footer email
+    const emailLinkEl = document.getElementById("emailLink");
+    emailLinkEl.href = `mailto:${EMAIL}`;
+    emailLinkEl.textContent = EMAIL;
+
+    const updatedEl = document.getElementById("updated");
+
+    // Content
     const content = {
       en: `
-        <section id="about-en">
-          <h2>About Us</h2>
-          <p><strong>EastDev Games</strong> is an independent mobile game developer focused on creating fun, accessible, and lightweight games for a wide audience.</p>
-          <p>We publish multiple games across different genres and provide support through a single contact channel.</p>
-        </section>
-
-        <div class="divider">— Privacy Policy —</div>
-
         <section id="privacy-en">
-          <p><strong>EastDev Games</strong> respects your privacy.</p>
-          <p><strong>Last updated:</strong> ${LAST_UPDATED}</p>
+          <h2>Privacy Policy (EastDev Games)</h2>
+          <p><strong>EastDev Games</strong> respects your privacy. This Privacy Policy explains how our games and apps handle information.</p>
+          <p><strong>Last updated:</strong> <span class="last-updated"></span></p>
+        </section>
+
+        <div class="divider"></div>
+
+        <section id="about-en">
+          <h2>About Us (EastDev Games)</h2>
+          <p><strong>EastDev Games</strong> is an independent mobile game developer focused on creating fun, accessible, and lightweight games for a wide audience.</p>
+          <p>We publish multiple games across different genres and platforms, and we aim to provide a smooth and enjoyable experience for all players.</p>
+          <p>Support for all of our games is provided through a single contact channel to ensure consistency and faster responses.</p>
         </section>
 
         <section>
-          <h2>Data Collection</h2>
-          <p>We do not directly collect personal information. Some third-party services (ads/analytics) may collect limited data under their own policies.</p>
+          <h2>Overview</h2>
+          <p>We publish multiple games and apps. In general, we do not directly collect or store personal information unless you contact us for support.</p>
         </section>
 
         <section>
-          <h2>Contact</h2>
-          <p>Email us at <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+          <h2>Information We Collect</h2>
+          <ul>
+            <li><strong>Support emails:</strong> If you contact us, we receive the information you send (e.g., your email address, message, screenshots).</li>
+            <li><strong>Automatically collected data by third parties:</strong> Some games may include third-party SDKs (ads/analytics) that collect data such as device identifiers, approximate location, and usage events.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Advertising & Analytics</h2>
+          <p>Our games may show ads and use analytics to understand performance and improve the experience. Advertising and analytics partners may collect limited information (such as device identifiers and usage data) under their own privacy policies.</p>
+        </section>
+
+        <section>
+          <h2>In-App Purchases</h2>
+          <p>Some games offer optional in-app purchases. Transactions are processed securely by the app store platform (Apple App Store / Google Play). We do not receive or store your payment information.</p>
+        </section>
+
+        <section>
+          <h2>Permissions</h2>
+          <p>Our games typically do not request access to sensitive permissions (like contacts, camera, microphone) unless a specific feature requires it. If a game requires a permission, it will be shown to you by your device and can be managed in your device settings.</p>
+        </section>
+
+        <section>
+          <h2>Children’s Privacy</h2>
+          <p>We do not knowingly collect personal information from children. If you believe a child has provided personal information to us, contact us and we will take appropriate steps.</p>
+        </section>
+
+        <section>
+          <h2>Changes to This Policy</h2>
+          <p>We may update this Privacy Policy from time to time. Updates will be posted on this page with a revised “Last updated” date.</p>
+        </section>
+
+        <section id="contact-en">
+          <h2>Contact (Support Email)</h2>
+          <p>If you have any questions, contact us at <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
         </section>
       `,
       tr: `
-        <section id="about-tr">
-          <h2>Hakkımızda</h2>
-          <p><strong>EastDev Games</strong>, eğlenceli ve erişilebilir mobil oyunlar geliştiren bağımsız bir oyun geliştiricisidir.</p>
-          <p>Tüm oyunlarımız için destek tek bir iletişim kanalı üzerinden sağlanır.</p>
-        </section>
-
-        <div class="divider">— Gizlilik Politikası —</div>
-
         <section id="privacy-tr">
-          <p><strong>EastDev Games</strong> gizliliğinize saygı duyar.</p>
-          <p><strong>Son güncelleme:</strong> ${LAST_UPDATED}</p>
+          <h2>Gizlilik Politikası (EastDev Games)</h2>
+          <p><strong>EastDev Games</strong> gizliliğinize saygı duyar. Bu Gizlilik Politikası, oyunlarımızın ve uygulamalarımızın bilgileri nasıl ele aldığını açıklar.</p>
+          <p><strong>Son güncelleme:</strong> <span class="last-updated"></span></p>
+        </section>
+
+        <div class="divider"></div>
+        
+        <section id="about-tr">
+          <h2>Hakkımızda (EastDev Games)</h2>
+          <p><strong>EastDev Games</strong>, geniş bir kitle için eğlenceli, erişilebilir ve hafif mobil oyunlar geliştirmeye odaklanan bağımsız bir oyun geliştiricisidir.</p>
+          <p>Farklı türlerde ve platformlarda birden fazla oyun yayınlıyor, tüm oyuncular için akıcı ve keyifli bir deneyim sunmayı hedefliyoruz.</p>
+          <p>Tüm oyunlarımız için destek hizmeti, tutarlılık ve daha hızlı geri dönüş sağlamak amacıyla tek bir iletişim kanalı üzerinden verilmektedir.</p>
         </section>
 
         <section>
-          <h2>Veri Toplama</h2>
-          <p>Doğrudan kişisel veri toplamıyoruz. Reklam ve analiz hizmetleri sınırlı veriler toplayabilir.</p>
+          <h2>Genel Bilgi</h2>
+          <p>Birden fazla oyun ve uygulama yayınlıyoruz. Genel olarak, destek için bizimle iletişime geçmediğiniz sürece doğrudan kişisel veri toplamıyor veya saklamıyoruz.</p>
         </section>
 
         <section>
-          <h2>İletişim</h2>
-          <p>E-posta: <a href="mailto:${EMAIL}">${EMAIL}</a></p>
+          <h2>Topladığımız Bilgiler</h2>
+          <ul>
+            <li><strong>Destek e-postaları:</strong> Bizimle iletişime geçtiğinizde gönderdiğiniz bilgileri alırız (örn. e-posta adresiniz, mesajınız, ekran görüntüleri).</li>
+            <li><strong>Üçüncü taraflarca otomatik toplanan veriler:</strong> Bazı oyunlarımız reklam/analiz gibi üçüncü taraf SDK’lar içerebilir. Bu hizmetler; cihaz tanımlayıcıları, yaklaşık konum ve kullanım olayları gibi verileri kendi politikalarına göre toplayabilir.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Reklamlar ve Analiz</h2>
+          <p>Oyunlarımız reklam gösterebilir ve performansı anlamak/iyileştirmek için analiz kullanabilir. Reklam ve analiz sağlayıcıları, kendi gizlilik politikalarına uygun şekilde sınırlı veriler (örn. cihaz tanımlayıcıları ve kullanım verileri) toplayabilir.</p>
+        </section>
+
+        <section>
+          <h2>Uygulama İçi Satın Alma</h2>
+          <p>Bazı oyunlarımız isteğe bağlı uygulama içi satın alma sunabilir. İşlemler Apple App Store / Google Play tarafından güvenli şekilde gerçekleştirilir. Ödeme bilgilerinize erişimimiz yoktur.</p>
+        </section>
+
+        <section>
+          <h2>İzinler</h2>
+          <p>Oyunlarımız genellikle kişiler, kamera, mikrofon gibi hassas izinleri istemez. Bir özellik için izin gerekirse, cihazınız bunu size gösterir ve izinleri cihaz ayarlarınızdan yönetebilirsiniz.</p>
+        </section>
+
+        <section>
+          <h2>Çocukların Gizliliği</h2>
+          <p>Çocuklardan bilerek kişisel veri toplamıyoruz. Bir çocuğun bize kişisel bilgi sağladığını düşünüyorsanız bizimle iletişime geçin; uygun adımları atarız.</p>
+        </section>
+
+        <section>
+          <h2>Bu Politikanın Güncellenmesi</h2>
+          <p>Bu Gizlilik Politikası zaman zaman güncellenebilir. Güncellemeler bu sayfada “Son güncelleme” tarihiyle birlikte yayınlanır.</p>
+        </section>
+
+        <section id="contact-tr">
+          <h2>İletişim (Destek E-postası)</h2>
+          <p>Sorularınız için bize şu adresten ulaşabilirsiniz: <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
         </section>
       `
     };
 
+    // Elements
     const contentEl = document.getElementById("content");
+    const titleEl = document.getElementById("title");
     const btnEN = document.getElementById("btn-en");
     const btnTR = document.getElementById("btn-tr");
     const btnTheme = document.getElementById("btn-theme");
 
-    function setLang(lang) {
+    function applyLastUpdated(lang) {
+      const d = new Date(LAST_UPDATED + "T00:00:00");
+      const formatted = d.toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      document.querySelectorAll(".last-updated").forEach(el => (el.textContent = formatted));
+      updatedEl.textContent = (lang === "tr" ? "Son gunelleme: " : "Last updated: ") + formatted;
+    }
+
+    function parseHash() {
+      // supports: #en, #tr, #about-en, #privacy-tr, #contact-en ...
+      const raw = (location.hash || "").replace("#", "").trim();
+      if (!raw) return { lang: null, targetId: null };
+
+      if (raw === "en" || raw === "tr") return { lang: raw, targetId: null };
+
+      const parts = raw.split("-");
+      const last = parts[parts.length - 1];
+      const lang = (last === "en" || last === "tr") ? last : null;
+
+      return { lang, targetId: raw };
+    }
+
+    function scrollToTarget(targetId) {
+      if (!targetId) return;
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+    }
+
+    function setLang(lang, updateHashToLang = false) {
       contentEl.innerHTML = content[lang];
+      titleEl.textContent = lang === "en" ? "Privacy Policy" : "Gizlilik Politikası";
+
       btnEN.classList.toggle("active", lang === "en");
       btnTR.classList.toggle("active", lang === "tr");
-      document.documentElement.lang = lang;
+
       localStorage.setItem("lang", lang);
+      document.documentElement.lang = lang;
+
+      applyLastUpdated(lang);
+
+      // Only set hash to #en/#tr when user clicks language buttons
+      if (updateHashToLang) {
+        history.replaceState(null, "", "#" + lang);
+      }
     }
 
     function setTheme(light) {
@@ -222,15 +354,29 @@
       localStorage.setItem("theme", light ? "light" : "dark");
     }
 
-    const savedLang = localStorage.getItem("lang") || "en";
+    // Init: hash > localStorage > default
+    const { lang: hashLang, targetId } = parseHash();
+    const savedLang = localStorage.getItem("lang");
+    const initLang = (hashLang === "tr" || hashLang === "en") ? hashLang : (savedLang || "en");
+
     const savedTheme = localStorage.getItem("theme") || "dark";
 
-    setLang(savedLang);
+    setLang(initLang, false);
     setTheme(savedTheme === "light");
+    scrollToTarget(targetId);
 
-    btnEN.onclick = () => setLang("en");
-    btnTR.onclick = () => setLang("tr");
+    // Buttons
+    btnEN.onclick = () => setLang("en", true);
+    btnTR.onclick = () => setLang("tr", true);
     btnTheme.onclick = () => setTheme(!document.body.classList.contains("light"));
+
+    // Handle hash changes (e.g., user opens a deep link after page load)
+    window.addEventListener("hashchange", () => {
+      const { lang, targetId } = parseHash();
+      const effectiveLang = (lang === "en" || lang === "tr") ? lang : (localStorage.getItem("lang") || "en");
+      setLang(effectiveLang, false);
+      scrollToTarget(targetId);
+    });
   </script>
 </body>
 
